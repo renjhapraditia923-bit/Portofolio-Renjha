@@ -2,7 +2,10 @@ import { put, list, del } from '@vercel/blob';
 import { timingSafeEqual } from 'node:crypto';
 
 const PHOTOS_PREFIX = 'photos/';
-const ALLOWED_SLOTS = new Set(['img-tool-1', 'img-tool-2', 'img-tool-3', 'img-tool-4']);
+const ALLOWED_SLOTS = new Set([
+  'img-tool-1', 'img-tool-2', 'img-tool-3', 'img-tool-4',
+  'img-org-1', 'img-org-2', 'img-org-3',
+]);
 const MAX_BYTES = 4 * 1024 * 1024;
 const ALLOWED_TYPES = {
   'image/jpeg': 'jpg',
