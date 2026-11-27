@@ -148,7 +148,7 @@
                 <!-- Foto Cover Diperbesar -->
                 <div class="md:col-span-6 flex justify-center">
                     <div class="relative w-60 sm:w-72 md:w-80 aspect-[3/4] rounded-3xl overflow-hidden bg-[#E2E8F0] border-4 border-white ring-2 ring-rose-500/20 shadow-xl">
-                        <img id="img-cover" src="https://placehold.co/640x850/E2E8F0/0F172A?text=Foto+Cover+Renjha" alt="Foto Cover Renjha" class="w-full h-full object-cover">
+                        <img id="img-cover" src="/images/cover-renjha.png" alt="Renjha Ramda Praditia mengenakan toga wisuda merah marun dengan selempang kuning, bersedekap dan tersenyum" class="w-full h-full object-cover object-top bg-white" fetchpriority="high">
                         <button onclick="openUpload('img-cover')" class="no-print absolute bottom-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/95 backdrop-blur border border-deckBorder text-deckInk text-[11px] font-semibold shadow-md hover:bg-deckCrimson hover:border-deckCrimson hover:text-white transition-colors whitespace-nowrap">
                             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
                             <span>Ganti Foto Cover</span>
@@ -1009,9 +1009,61 @@
             fileInput.click();
         }
 
+        const COVER_MAX_BYTES = 4 * 1024 * 1024;
+        const COVER_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
+
+        async function loadSavedCover() {
+            try {
+                const res = await fetch('/api/cover');
+                if (!res.ok) return;
+                const { url } = await res.json();
+                if (url) document.getElementById('img-cover').src = url;
+            } catch (err) {
+                console.error('Gagal memuat foto cover:', err);
+            }
+        }
+        loadSavedCover();
+
+        async function uploadCover(file) {
+            if (!COVER_TYPES.includes(file.type)) {
+                notify('Format tidak didukung. Gunakan JPG, PNG, WEBP, atau AVIF.');
+                return;
+            }
+            if (file.size > COVER_MAX_BYTES) {
+                notify('Ukuran foto maksimal 4 MB.');
+                return;
+            }
+            const password = window.prompt('Masukkan password admin untuk mengganti foto cover:');
+            if (!password) return;
+
+            notify('Mengunggah foto cover...');
+            try {
+                const res = await fetch('/api/cover', {
+                    method: 'POST',
+                    headers: { 'Content-Type': file.type, 'x-admin-password': password },
+                    body: file,
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok || !data.url) {
+                    notify(data.error || 'Gagal mengunggah foto cover.');
+                    return;
+                }
+                document.getElementById('img-cover').src = data.url;
+                notify('Foto cover tersimpan permanen!');
+            } catch (err) {
+                console.error('Gagal mengunggah foto cover:', err);
+                notify('Gagal mengunggah foto cover.');
+            }
+        }
+
         fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file || !activeImgTarget) return;
+
+            if (activeImgTarget === 'img-cover') {
+                uploadCover(file);
+                return;
+            }
 
             const reader = new FileReader();
             reader.onload = function(evt) {
