@@ -364,19 +364,19 @@
         <!-- 4 Slot Dokumentasi Aktivitas (seperti 4 tombol Ganti di bawah Tools) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
-                <img id="img-tool-1" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+1" alt="Dokumentasi 1" class="w-full h-full object-cover">
+                <img id="img-tool-1" src="/images/dok-1-riset-lapangan.jpeg" alt="Renjha mencatat temuan saat riset lapangan di hutan bersama tim berseragam biru" class="w-full h-full object-cover">
                 <button onclick="openUpload('img-tool-1')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
             </div>
             <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
-                <img id="img-tool-2" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+2" alt="Dokumentasi 2" class="w-full h-full object-cover">
+                <img id="img-tool-2" src="/images/dok-2-sponsor-poster.jpeg" alt="Poster sponsor dan mitra media konser, antara lain KAI, Telkomsel, Pertamina EP, dan wondr by BNI" class="w-full h-full object-cover">
                 <button onclick="openUpload('img-tool-2')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
             </div>
             <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
-                <img id="img-tool-3" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+3" alt="Dokumentasi 3" class="w-full h-full object-cover">
+                <img id="img-tool-3" src="/images/dok-3-portofolio-canva.jpeg" alt="Kumpulan desain Canva: poster, proposal kerja sama, dan materi promosi" class="w-full h-full object-cover">
                 <button onclick="openUpload('img-tool-3')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
             </div>
             <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
-                <img id="img-tool-4" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+4" alt="Dokumentasi 4" class="w-full h-full object-cover">
+                <img id="img-tool-4" src="/images/dok-4-kitabisa.png" alt="Penggalangan dana Kitabisa PSM Unpad menuju Singapura oleh Renjha Ramda Praditia" class="w-full h-full object-cover">
                 <button onclick="openUpload('img-tool-4')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
             </div>
         </div>
@@ -1056,12 +1056,66 @@
             }
         }
 
+        const PERSISTED_SLOTS = ['img-tool-1', 'img-tool-2', 'img-tool-3', 'img-tool-4'];
+
+        async function loadSavedPhotos() {
+            try {
+                const res = await fetch('/api/photos');
+                if (!res.ok) return;
+                const { photos = {} } = await res.json();
+                for (const [slot, url] of Object.entries(photos)) {
+                    const img = document.getElementById(slot);
+                    if (img && url) img.src = url;
+                }
+            } catch (err) {
+                console.error('Gagal memuat foto dokumentasi:', err);
+            }
+        }
+        loadSavedPhotos();
+
+        async function uploadSlotPhoto(slot, file) {
+            if (!COVER_TYPES.includes(file.type)) {
+                notify('Format tidak didukung. Gunakan JPG, PNG, WEBP, atau AVIF.');
+                return;
+            }
+            if (file.size > COVER_MAX_BYTES) {
+                notify('Ukuran foto maksimal 4 MB.');
+                return;
+            }
+            const password = window.prompt('Masukkan password admin untuk mengganti foto:');
+            if (!password) return;
+
+            notify('Mengunggah foto...');
+            try {
+                const res = await fetch('/api/photos?slot=' + encodeURIComponent(slot), {
+                    method: 'POST',
+                    headers: { 'Content-Type': file.type, 'x-admin-password': password },
+                    body: file,
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok || !data.url) {
+                    notify(data.error || 'Gagal mengunggah foto.');
+                    return;
+                }
+                document.getElementById(slot).src = data.url;
+                notify('Foto tersimpan permanen!');
+            } catch (err) {
+                console.error('Gagal mengunggah foto:', err);
+                notify('Gagal mengunggah foto.');
+            }
+        }
+
         fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file || !activeImgTarget) return;
 
             if (activeImgTarget === 'img-cover') {
                 uploadCover(file);
+                return;
+            }
+
+            if (PERSISTED_SLOTS.includes(activeImgTarget)) {
+                uploadSlotPhoto(activeImgTarget, file);
                 return;
             }
 
