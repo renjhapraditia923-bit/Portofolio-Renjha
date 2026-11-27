@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renjha.deck — Social Research, Branding & Partnership Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        deckBg: '#F6F7F9',       // Abu-abu keputihan lembut
+                        deckCard: '#FFFFFF',     // Kartu putih bersih
+                        deckInk: '#0F172A',      // Teks utama slate gelap
+                        deckMuted: '#64748B',    // Teks pendukung abu-abu
+                        deckBorder: '#E2E8F0',   // Garis tepi rapi
+                        deckAccent: '#2563EB',   // Biru editorial seimbang
+                        deckCrimson: '#C81E32',  // Merah hidup & berkarakter
+                        deckSoft: '#EFF6FF'      // Latar badge lembut
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+        }
+        .deck-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .deck-card:hover {
+            transform: translateY(-2px);
+            border-color: #94A3B8;
+            box-shadow: 0 12px 28px -12px rgba(15, 23, 42, 0.12);
+        }
+        .tab-btn.active {
+            background-color: #0F172A;
+            color: #FFFFFF;
+            border-color: #0F172A;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: #FFFFFF !important;
+            }
+            section {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- Input File Tersembunyi untuk Fitur Ganti Foto / Karya -->
+    <input type="file" id="photo-uploader" accept="image/*" class="hidden">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="no-print fixed bottom-5 right-5 z-50 hidden items-center gap-2 px-4 py-3 rounded-xl bg-deckInk text-white text-xs font-semibold shadow-xl">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toast-label">Berhasil</span>
+    </div>
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-deckBorder">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <a href="#" class="font-heading font-extrabold text-xl tracking-tight text-deckInk flex items-center gap-1">
+                <span>Renjha<span class="text-deckAccent">.deck</span></span>
+            </a>
+
+            <!-- Navigasi Utama -->
+            <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-deckMuted">
+                <a href="#sec-01" class="hover:text-deckInk transition-colors"><strong class="text-deckInk">01.</strong> Perkenalan</a>
+                <a href="#sec-02" class="hover:text-deckInk transition-colors"><strong class="text-deckInk">02.</strong> Keunggulan & Tools</a>
+                <a href="#sec-03" class="hover:text-deckInk transition-colors"><strong class="text-deckInk">03.</strong> Kerja & Organisasi</a>
+                <a href="#sec-04" class="hover:text-deckInk transition-colors"><strong class="text-deckInk">04.</strong> Karya Figma, Canva & Poster</a>
+                <a href="#sec-05" class="hover:text-deckInk transition-colors"><strong class="text-deckInk">05.</strong> Riset & Prestasi</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="no-print flex items-center gap-2 shrink-0">
+                <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-deckBorder hover:border-deckInk text-deckInk text-xs font-semibold transition-colors">
+                    <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                    <span>Simpan PDF</span>
+                </button>
+                <a href="#kontak" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-deckInk hover:bg-slate-800 text-white text-xs font-semibold transition-colors">
+                    <span>Kontak</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- COVER / HERO DECK (Foto cover diperbesar, background bertekstur lembut & tidak ngejreng, tulisan Porto | folio.) -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-8">
+        <div class="deck-card relative rounded-[28px] p-6 sm:p-10 md:p-12 overflow-hidden bg-gradient-to-br from-[#F7F6F8] via-[#F2F4F8] to-[#EAEFF6]">
+            <!-- Pola Grid Halus + Blob Warna Lembut (Termasuk sentuhan merah halus agar hidup) -->
+            <div class="pointer-events-none absolute inset-0 opacity-45" style="background-image: radial-gradient(#94A3B8 0.8px, transparent 0.8px); background-size: 22px 22px;"></div>
+            <div class="pointer-events-none absolute -top-24 -left-20 w-80 h-80 rounded-full bg-rose-200/45 blur-3xl"></div>
+            <div class="pointer-events-none absolute -bottom-24 right-10 w-80 h-80 rounded-full bg-blue-200/45 blur-3xl"></div>
+
+            <!-- Dekorasi Gelombang Halus di Latar Belakang -->
+            <svg class="pointer-events-none absolute inset-0 w-full h-full opacity-70" viewBox="0 0 1200 540" fill="none" preserveAspectRatio="none">
+                <path d="M-40 165 C180 65, 340 250, 560 155 C760 70, 960 220, 1240 120" stroke="#CBD5E1" stroke-width="18" stroke-linecap="round"/>
+                <path d="M-40 400 C220 310, 420 450, 680 365 C890 295, 1050 395, 1240 330" stroke="#E2E8F0" stroke-width="18" stroke-linecap="round"/>
+                <circle cx="965" cy="115" r="7" fill="#C81E32" fill-opacity="0.75"/>
+                <circle cx="235" cy="435" r="5" fill="#C81E32" fill-opacity="0.55"/>
+            </svg>
+
+            <!-- Baris Atas Cover -->
+            <div class="relative z-10 flex items-start justify-between gap-4 mb-5 sm:mb-3">
+                <div class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-bold tracking-[0.08em] uppercase text-deckInk/85 leading-snug">
+                    <span class="w-2 h-2 rounded-full bg-deckCrimson shrink-0"></span>
+                    <span>SOCIAL RESEARCH, BRANDING<br>&amp; PARTNERSHIP PORTFOLIO</span>
+                </div>
+                <div class="text-right leading-none">
+                    <div class="text-[10px] font-bold tracking-[0.14em] uppercase text-deckMuted mb-1">TAHUN</div>
+                    <div class="font-heading font-extrabold text-xl sm:text-2xl text-deckCrimson">2026</div>
+                </div>
+            </div>
+
+            <!-- Tengah Cover: "Porto" di Kiri + Foto Cover Diperbesar di Tengah + "folio." di Kanan -->
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 items-center gap-4 md:gap-6 my-2">
+                <div class="hidden md:block md:col-span-3 text-right pr-2">
+                    <span class="font-heading font-extrabold text-5xl lg:text-6xl tracking-tight text-deckCrimson drop-shadow-[0_2px_10px_rgba(200,30,50,0.14)]">
+                        Porto
+                    </span>
+                </div>
+
+                <!-- Foto Cover Diperbesar -->
+                <div class="md:col-span-6 flex justify-center">
+                    <div class="relative w-60 sm:w-72 md:w-80 aspect-[3/4] rounded-3xl overflow-hidden bg-[#E2E8F0] border-4 border-white ring-2 ring-rose-500/20 shadow-xl">
+                        <img id="img-cover" src="https://placehold.co/640x850/E2E8F0/0F172A?text=Foto+Cover+Renjha" alt="Foto Cover Renjha" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-cover')" class="no-print absolute bottom-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/95 backdrop-blur border border-deckBorder text-deckInk text-[11px] font-semibold shadow-md hover:bg-deckCrimson hover:border-deckCrimson hover:text-white transition-colors whitespace-nowrap">
+                            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+                            <span>Ganti Foto Cover</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex md:col-span-3 items-baseline pl-2">
+                    <span class="font-heading font-extrabold text-5xl lg:text-6xl tracking-tight text-deckCrimson drop-shadow-[0_2px_10px_rgba(200,30,50,0.14)]">
+                        folio
+                    </span>
+                    <span class="w-3.5 h-3.5 bg-deckInk inline-block ml-1"></span>
+                </div>
+            </div>
+
+            <!-- Baris Bawah Cover: Nama Besar + Pill Tagline Gelap + Tombol Panah -->
+            <div class="relative z-10 mt-6 sm:mt-4 flex items-end justify-between gap-4">
+                <div>
+                    <h1 class="font-heading font-extrabold text-2xl sm:text-4xl md:text-5xl tracking-tight text-deckInk leading-none mb-3">
+                        RENJHA RAMDA PRADITIA
+                    </h1>
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-deckInk text-white text-xs sm:text-sm italic shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-deckCrimson not-italic shrink-0"></span>
+                        <span>A journey of Knowledge, Care &amp; Impact.</span>
+                    </div>
+                </div>
+
+                <a href="#sec-01" aria-label="Lanjut ke Tentang Saya" class="no-print w-11 h-11 rounded-2xl bg-deckCrimson border border-deckCrimson shadow-sm flex items-center justify-center text-white hover:bg-rose-800 transition-colors shrink-0">
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 01. PERKENALAN & PENDIDIKAN (Persis gaya screenshot 2: Tentang Saya / Perkenalan + Candid 1, Foto Formal / Almamater, Candid 2) -->
+    <section id="sec-01" class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+        <div class="deck-card rounded-[28px] overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                <!-- Kolom Kiri: Tentang Saya, Perkenalan, Pendidikan, Kontak Langsung -->
+                <div class="lg:col-span-7 p-6 sm:p-8 md:p-10 lg:border-r border-deckBorder flex flex-col justify-between">
+                    <div>
+                        <div class="font-serif italic text-xl sm:text-2xl text-deckMuted mb-1">Tentang Saya</div>
+                        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-deckInk tracking-tight mb-5">
+                            Perkenalan
+                        </h2>
+
+                        <p class="text-sm sm:text-[15px] text-deckInk/90 leading-relaxed mb-4">
+                            Sarjana Antropologi <strong class="font-bold text-deckInk">Universitas Padjadjaran (IPK 3.67/4.00)</strong> dengan kombinasi keahlian riset sosial lapangan, produksi konten digital (Figma &amp; Canva), serta kemitraan strategis. Berpengalaman melakukan pemetaan sosial masyarakat hingga menghasilkan artikel ilmiah terakreditasi <strong class="font-bold text-deckInk">SINTA 2 &amp; SINTA 4</strong>.
+                        </p>
+                        <p class="text-sm sm:text-[15px] text-deckMuted leading-relaxed mb-7">
+                            Di luar akademik, aktif membangun citra digital organisasi dan menutup negosiasi sponsorship dengan total raihan <strong class="font-bold text-deckInk">Rp420.000.000 dana tunai &amp; Rp30.000.000 dukungan in-kind</strong> untuk delegasi kompetisi internasional.
+                        </p>
+
+                        <!-- PENDIDIKAN -->
+                        <div class="pt-5 border-t border-deckBorder mb-6">
+                            <span class="text-[11px] font-bold uppercase tracking-[0.12em] text-deckMuted block mb-4">PENDIDIKAN</span>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3.5">
+                                    <div class="w-11 h-11 rounded-full bg-deckBg border border-deckBorder text-deckInk font-heading font-extrabold text-[11px] flex items-center justify-center shrink-0">
+                                        UNPAD
+                                    </div>
+                                    <div>
+                                        <h3 class="font-heading font-bold text-sm text-deckInk">Universitas Padjadjaran | Sarjana Antropologi (IPK 3.67 / 4.00)</h3>
+                                        <p class="text-xs text-deckMuted mt-0.5">2022 – 2026 • Penulis Pertama Jurnal SINTA 2 &amp; Nilai Tertinggi Riset Etnografi</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3.5">
+                                    <div class="w-11 h-11 rounded-full bg-deckBg border border-deckBorder text-deckInk font-heading font-extrabold text-[11px] flex items-center justify-center shrink-0">
+                                        SMA
+                                    </div>
+                                    <div>
+                                        <h3 class="font-heading font-bold text-sm text-deckInk">SMAN 2 Garut | Jurusan Ilmu Pengetahuan Sosial</h3>
+                                        <p class="text-xs text-deckMuted mt-0.5">2019 – 2022 • Juara Umum I Jurusan IPS &amp; Peserta OSN Kebumian</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KONTAK LANGSUNG -->
+                    <div class="pt-5 border-t border-deckBorder">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.12em] text-deckMuted block mb-3">KONTAK LANGSUNG</span>
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="copyContact('renjhapraditia923@gmail.com')" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white border border-deckBorder hover:border-deckInk text-xs sm:text-sm font-medium text-deckInk shadow-2xs transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-deckInk text-white flex items-center justify-center">
+                                    <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span>renjhapraditia923@gmail.com</span>
+                            </button>
+
+                            <button onclick="copyContact('+62 882-1988-5975')" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white border border-deckBorder hover:border-deckInk text-xs sm:text-sm font-medium text-deckInk shadow-2xs transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-deckInk text-white flex items-center justify-center">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span>+62 882-1988-5975</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Candid 1 (Lingkaran Atas), Foto Formal / Almamater (Tengah), Candid 2 (Lingkaran Bawah) -->
+                <div class="lg:col-span-5 bg-[#F8FAFC] p-6 sm:p-8 flex flex-col items-center justify-between gap-5">
+                    <!-- Candid 1 -->
+                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-white border-4 border-white shadow-md flex items-center justify-center">
+                        <img id="img-edu-1" src="https://placehold.co/220x220/FFFFFF/0F172A?text=Candid+1" alt="Candid 1" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-edu-1')" class="no-print absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 text-white text-[10px] font-semibold flex items-center justify-center transition-opacity">Ganti foto</button>
+                    </div>
+
+                    <!-- Foto Formal / Almamater -->
+                    <div class="relative w-full max-w-xs aspect-[4/5] rounded-3xl overflow-hidden bg-[#E2E8F0] border-4 border-white shadow-md">
+                        <img id="img-edu-2" src="https://placehold.co/480x600/E2E8F0/0F172A?text=Foto+Formal+%2F+Almamater" alt="Foto Formal / Almamater" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-edu-2')" class="no-print absolute bottom-3 right-3 px-3.5 py-1.5 rounded-xl bg-white/95 border border-deckBorder text-xs font-semibold text-deckInk shadow-sm hover:bg-deckInk hover:text-white transition-colors">
+                            Ganti foto
+                        </button>
+                    </div>
+
+                    <!-- Candid 2 -->
+                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-[#E2E8F0] border-4 border-white shadow-md flex items-center justify-center">
+                        <img id="img-edu-3" src="https://placehold.co/220x220/E2E8F0/0F172A?text=Candid+2" alt="Candid 2" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-edu-3')" class="no-print absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 text-white text-[10px] font-semibold flex items-center justify-center transition-opacity">Ganti foto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. KEUNGGULAN UTAMA & TOOLS -->
+    <section id="sec-02" class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-5">
+            <div>
+                <span class="text-xs font-bold tracking-widest uppercase text-deckAccent">02. KEUNGGULAN UTAMA & TOOLS</span>
+                <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-deckInk mt-1">Highlight Skills — Keunggulan Utama</h2>
+            </div>
+            <!-- Slot Foto Highlight Skills -->
+            <div class="flex items-center gap-2">
+                <div class="relative w-24 h-12 rounded-xl overflow-hidden bg-white border border-deckBorder">
+                    <img id="img-skill-main" src="https://placehold.co/240x120/F1F5F9/64748B?text=Highlight" alt="Highlight Skills" class="w-full h-full object-cover">
+                    <button onclick="openUpload('img-skill-main')" class="no-print absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 text-white text-[10px] font-semibold flex items-center justify-center transition-opacity">Ganti foto</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Kartu Keunggulan Utama -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+            <div class="deck-card rounded-3xl p-6">
+                <span class="inline-block px-2.5 py-0.5 rounded-md bg-deckSoft text-deckAccent text-[11px] font-bold mb-2">01 / Riset & Pemetaan</span>
+                <h3 class="font-heading font-bold text-lg text-deckInk mb-2">Riset Sosial & Pemetaan Lapangan</h3>
+                <p class="text-sm text-deckMuted leading-relaxed">
+                    Menguasai observasi partisipatif, wawancara mendalam, <em>social mapping</em> CSR, hingga analisis kuantitatif & kualitatif yang teruji melalui publikasi jurnal SINTA 2 & 4.
+                </p>
+            </div>
+
+            <div class="deck-card rounded-3xl p-6">
+                <span class="inline-block px-2.5 py-0.5 rounded-md bg-deckSoft text-deckAccent text-[11px] font-bold mb-2">02 / Sponsorship</span>
+                <h3 class="font-heading font-bold text-lg text-deckInk mb-2">Sponsorship & Negosiasi Korporat</h3>
+                <p class="text-sm text-deckMuted leading-relaxed">
+                    Merancang proposal strategis, memimpin audiensi B2B & instansi pemerintah, hingga mengamankan Rp450 Juta+ dana tunai dan dukungan <em>in-kind</em>.
+                </p>
+            </div>
+
+            <div class="deck-card rounded-3xl p-6">
+                <span class="inline-block px-2.5 py-0.5 rounded-md bg-deckSoft text-deckAccent text-[11px] font-bold mb-2">03 / Desain Visual</span>
+                <h3 class="font-heading font-bold text-lg text-deckInk mb-2">Desain Digital (Figma & Canva)</h3>
+                <p class="text-sm text-deckMuted leading-relaxed">
+                    Memproduksi aset visual, identitas logo acara, poster publikasi, proposal kemitraan, hingga kebutuhan kampanye digital di PT Vaganza maupun proyek kolaborasi rekan.
+                </p>
+            </div>
+
+            <div class="deck-card rounded-3xl p-6">
+                <span class="inline-block px-2.5 py-0.5 rounded-md bg-deckSoft text-deckAccent text-[11px] font-bold mb-2">04 / Digital Growth</span>
+                <h3 class="font-heading font-bold text-lg text-deckInk mb-2">Strategi Konten & Retensi Audiens</h3>
+                <p class="text-sm text-deckMuted leading-relaxed">
+                    Mengelola Instagram, TikTok, dan Twitter dengan riset tren serta TikTok Live hingga mendorong pertumbuhan pengikut 10x lipat.
+                </p>
+            </div>
+        </div>
+
+        <!-- 3 Kartu Tools + 4 Slot Mini Galeri -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+            <div class="deck-card rounded-3xl p-5">
+                <h4 class="font-heading font-bold text-sm text-deckInk mb-3">Aplikasi Kreatif & Desain</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Figma</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Canva</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">CapCut</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Fotografi & Videografi</span>
+                </div>
+            </div>
+
+            <div class="deck-card rounded-3xl p-5">
+                <h4 class="font-heading font-bold text-sm text-deckInk mb-3">Produktivitas & Manajemen Kerja</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Microsoft Excel (Data & Anggaran)</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Microsoft Word (Proposal & LPJ)</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">PowerPoint (Pitch Deck)</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Google Workspace</span>
+                </div>
+            </div>
+
+            <div class="deck-card rounded-3xl p-5">
+                <h4 class="font-heading font-bold text-sm text-deckInk mb-3">Kanal Publikasi & Riset Tren</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Instagram</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">TikTok & TikTok Live</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Twitter / X</span>
+                    <span class="px-3 py-1.5 rounded-xl bg-deckBg border border-deckBorder text-xs font-medium text-deckInk">Kitabisa Crowdfunding</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Slot Dokumentasi Aktivitas (seperti 4 tombol Ganti di bawah Tools) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
+                <img id="img-tool-1" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+1" alt="Dokumentasi 1" class="w-full h-full object-cover">
+                <button onclick="openUpload('img-tool-1')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+            </div>
+            <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
+                <img id="img-tool-2" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+2" alt="Dokumentasi 2" class="w-full h-full object-cover">
+                <button onclick="openUpload('img-tool-2')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+            </div>
+            <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
+                <img id="img-tool-3" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+3" alt="Dokumentasi 3" class="w-full h-full object-cover">
+                <button onclick="openUpload('img-tool-3')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+            </div>
+            <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white border border-deckBorder">
+                <img id="img-tool-4" src="https://placehold.co/400x225/F1F5F9/64748B?text=Dokumentasi+4" alt="Dokumentasi 4" class="w-full h-full object-cover">
+                <button onclick="openUpload('img-tool-4')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. PENGALAMAN KERJA, ORGANISASI & KEPANITIAAN -->
+    <section id="sec-03" class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        <div class="mb-5">
+            <span class="text-xs font-bold tracking-widest uppercase text-deckAccent">03. PENGALAMAN KERJA & ORGANISASI</span>
+            <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-deckInk mt-1">Pengalaman Kerja & Magang</h2>
+        </div>
+
+        <!-- Pengalaman Kerja & Magang -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Magang PT Vaganza -->
+            <div class="deck-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-start justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="font-heading font-bold text-lg text-deckInk">Social Media & Content Intern</h3>
+                            <p class="text-sm font-medium text-deckAccent">PT Vaganza Solusi Internasional</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-xl bg-deckBg border border-deckBorder text-xs font-bold text-deckInk shrink-0">Sept – Des 2024</span>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2.5 mb-5">
+                        <div class="bg-deckBg border border-deckBorder rounded-2xl p-3">
+                            <div class="font-heading font-bold text-xs text-deckInk">Figma & TikTok</div>
+                            <div class="text-[11px] text-deckMuted mt-0.5">Publikasi Digital</div>
+                        </div>
+                        <div class="bg-deckBg border border-deckBorder rounded-2xl p-3">
+                            <div class="font-heading font-bold text-xs text-deckInk">Content Plan</div>
+                            <div class="text-[11px] text-deckMuted mt-0.5">Riset Tren & Naskah</div>
+                        </div>
+                        <div class="bg-deckBg border border-deckBorder rounded-2xl p-3">
+                            <div class="font-heading font-bold text-xs text-deckInk">100% QC</div>
+                            <div class="text-[11px] text-deckMuted mt-0.5">Quality Checking</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#sec-04" class="inline-flex items-center gap-1.5 text-xs font-bold text-deckAccent hover:underline">
+                    <span>Lihat hasil karya magang PT Vaganza di bawah</span>
+                    <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+
+            <!-- Sadya Coffee (Buku Menu Dihapus sesuai revisi) -->
+            <div class="deck-card rounded-3xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-start justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="font-heading font-bold text-lg text-deckInk">Part-Time Kitchen & Menu Dev</h3>
+                            <p class="text-sm font-medium text-deckMuted">Sadya Coffee — Garut</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-xl bg-deckBg border border-deckBorder text-xs font-bold text-deckInk shrink-0">Jan – Agus 2022</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5 mb-4">
+                        <div class="bg-deckBg border border-deckBorder rounded-2xl p-3">
+                            <div class="font-heading font-bold text-xs text-deckInk">Menu Baru</div>
+                            <div class="text-[11px] text-deckMuted mt-0.5">Inovasi Produk F&B</div>
+                        </div>
+                        <div class="bg-deckBg border border-deckBorder rounded-2xl p-3">
+                            <div class="font-heading font-bold text-xs text-deckInk">Laporan</div>
+                            <div class="text-[11px] text-deckMuted mt-0.5">Belanja & Operasional</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-xs text-deckMuted leading-relaxed">
+                    Mengelola produksi dapur, inovasi varian menu, dan laporan biaya bulanan.
+                </p>
+            </div>
+        </div>
+
+        <!-- ORGANISASI -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-heading font-extrabold text-xl text-deckInk">Pengalaman Organisasi</h3>
+                <span class="px-3 py-1 rounded-lg bg-deckInk text-white text-[11px] font-bold tracking-wider">ORGANISASI</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Org 1 -->
+                <div class="deck-card rounded-3xl overflow-hidden flex flex-col">
+                    <div class="relative aspect-[16/10] bg-deckBg border-b border-deckBorder">
+                        <img id="img-org-1" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Tim+Media+Branding+PSM+Unpad" alt="Tim Media Branding PSM Unpad" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-org-1')" class="no-print absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti foto</button>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <span class="text-[11px] font-bold text-deckAccent uppercase">Tim Media Branding PSM Unpad</span>
+                        <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-2">Wakil Manager Media Promotion & Choral Branding — PSM Unpad 2025</h4>
+                        <p class="text-xs text-deckMuted leading-relaxed">
+                            Mengelola IG, TikTok & Twitter; mendorong pertumbuhan TikTok dari ratusan ke ribuan followers & menginisiasi TikTok Live fundraising.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Org 2 -->
+                <div class="deck-card rounded-3xl overflow-hidden flex flex-col">
+                    <div class="relative aspect-[16/10] bg-deckBg border-b border-deckBorder">
+                        <img id="img-org-2" src="https://placehold.co/500x310/F1F5F9/0F172A?text=External+%26+Singing+Engagement" alt="External & Singing Engagement" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-org-2')" class="no-print absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <span class="text-[11px] font-bold text-deckAccent uppercase">External & Singing Engagement</span>
+                        <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-2">External & Organizational Development — PSM Unpad 2023 – 2024</h4>
+                        <p class="text-xs text-deckMuted leading-relaxed">
+                            PIC penampilan profesional bersama perusahaan multinasional & instansi pemerintah, serta PJ Musyawarah Besar & School of Leadership.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Org 3 -->
+                <div class="deck-card rounded-3xl overflow-hidden flex flex-col">
+                    <div class="relative aspect-[16/10] bg-deckBg border-b border-deckBorder">
+                        <img id="img-org-3" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Himpunan+Antropologi+(HUMAN)" alt="Himpunan Antropologi HUMAN" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-org-3')" class="no-print absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <span class="text-[11px] font-bold text-deckAccent uppercase">Himpunan Antropologi (HUMAN)</span>
+                        <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-2">Hubungan Eksternal HUMAN Unpad & Koord. TIK OSIS 2021 – 2023</h4>
+                        <p class="text-xs text-deckMuted leading-relaxed">
+                            Mengelola seluruh kemitraan media partner Himpunan Antropologi & memproduksi video profil sekolah.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KEPANITIAAN & SPONSORSHIP -->
+        <div class="deck-card rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-6 border-b border-deckBorder">
+                <div>
+                    <span class="px-2.5 py-1 rounded-md bg-deckSoft text-deckAccent text-[11px] font-bold uppercase tracking-wider">KEPANITIAAN</span>
+                    <h3 class="font-heading font-extrabold text-xl text-deckInk mt-2">Pengalaman Kepanitiaan & Sponsorship</h3>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="px-4 py-2 rounded-xl bg-deckInk text-white font-heading font-extrabold text-sm">
+                        Total: Rp450.000.000+
+                    </div>
+                    <div class="relative w-16 h-10 rounded-xl overflow-hidden bg-deckBg border border-deckBorder">
+                        <img id="img-panitia" src="https://placehold.co/160x100/F1F5F9/64748B?text=Foto" alt="Foto Kepanitiaan" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-panitia')" class="no-print absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 text-white text-[10px] font-semibold flex items-center justify-center transition-opacity">Ganti</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-deckBg border border-deckBorder rounded-2xl p-5">
+                    <span class="text-xs font-bold text-deckAccent">Feb – Nov 2025</span>
+                    <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-1">Indonesia Kirana 2025 (menuju Rimini, Italia)</h4>
+                    <p class="text-xs text-deckMuted">Wakil Ketua Divisi Sponsorship • Meraih Rp420 Jt fresh money & Rp30 Jt in-kind.</p>
+                </div>
+
+                <div class="bg-deckBg border border-deckBorder rounded-2xl p-5">
+                    <span class="text-xs font-bold text-deckAccent">Feb – Agus 2024</span>
+                    <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-1">Festival Luar Negeri PSM Unpad (menuju Singapura)</h4>
+                    <p class="text-xs text-deckMuted">Ketua Divisi Sponsorship • Memimpin tim sponsorship korporat & crowdfunding Kitabisa.</p>
+                </div>
+
+                <div class="bg-deckBg border border-deckBorder rounded-2xl p-5">
+                    <span class="text-xs font-bold text-deckMuted">Mei 2023</span>
+                    <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-1">Konser Intern PSM Unpad</h4>
+                    <p class="text-xs text-deckMuted">Ketua Divisi Sponsorship • Skema profit sharing dengan brand kosmetik & pemenuhan kontraprestasi.</p>
+                </div>
+
+                <div class="bg-deckBg border border-deckBorder rounded-2xl p-5">
+                    <span class="text-xs font-bold text-deckMuted">Nov 2022 – Jan 2023</span>
+                    <h4 class="font-heading font-bold text-base text-deckInk mt-1 mb-1">One Gold Future 8.0 & Malam Apresiasi 2022</h4>
+                    <p class="text-xs text-deckMuted">Ketua Divisi Publikasi & Dokumentasi (Perancang Logo) serta MC & Konseptor Aftermovie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. KARYA PRODUK DIGITAL: FIGMA, CANVA & POSTER (SESUAI REVISI) -->
+    <section id="sec-04" class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        <div class="mb-5">
+            <span class="text-xs font-bold tracking-widest uppercase text-deckAccent">04. VISUAL & DESIGN SHOWCASE</span>
+            <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-deckInk mt-1">Karya Produk Digital: Figma, Canva & Poster</h2>
+            <p class="text-sm text-deckMuted mt-1 max-w-3xl">
+                Kumpulan hasil produksi digital selama magang di PT Vaganza Solusi Internasional (beberapa contoh pilihan dari berbagai konten yang dikerjakan), aset kreatif Canva, desain logo, proposal kerja sama, poster donasi, kolaborasi brand, serta proyek <em>freelance</em>. Klik <strong>“Ganti karya”</strong> untuk mengunggah gambar desain asli Anda.
+            </p>
+        </div>
+
+        <!-- BAGIAN A: PRODUK DIGITAL MAGANG ("3 di antaranya" agar terkesan mengerjakan banyak) -->
+        <div class="deck-card rounded-3xl p-6 sm:p-8 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-6 border-b border-deckBorder">
+                <div>
+                    <span class="text-xs font-bold text-deckAccent uppercase tracking-wider">Bagian A • Produk Digital Magang</span>
+                    <h3 class="font-heading font-extrabold text-xl text-deckInk mt-0.5">PT Vaganza Solusi Internasional</h3>
+                </div>
+                <span class="px-3.5 py-1.5 rounded-xl bg-deckSoft text-deckAccent text-xs font-bold self-start sm:self-auto">
+                    3 di antaranya (Karya Terpilih)
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- 1. Desain Figma Pengenalan Divisi -->
+                <article class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-magang-1" src="https://placehold.co/600x375/F1F5F9/0F172A?text=Desain+Figma%3A+Pengenalan+Divisi" alt="Desain Pengenalan Divisi di Perusahaan" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-magang-1')" class="no-print absolute bottom-2.5 right-2.5 px-3 py-1 rounded-lg bg-white/95 border border-deckBorder text-[11px] font-semibold text-deckInk hover:bg-deckInk hover:text-white transition-colors">
+                            Ganti karya
+                        </button>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="font-heading font-bold text-base text-deckInk mb-1">Desain Pengenalan Divisi di Perusahaan</h4>
+                        <p class="text-xs font-semibold text-deckAccent mb-2">Figma • Visual Publikasi & Profil Divisi</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">
+                            Perancangan aset visual di Figma untuk memperkenalkan profil, peran, dan struktur kerja masing-masing divisi di perusahaan.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 2. Konten Daily TikTok -->
+                <article class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-magang-2" src="https://placehold.co/600x375/F1F5F9/0F172A?text=Konten+Daily+Perusahaan+(TikTok)" alt="Konten Daily Perusahaan untuk TikTok" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-magang-2')" class="no-print absolute bottom-2.5 right-2.5 px-3 py-1 rounded-lg bg-white/95 border border-deckBorder text-[11px] font-semibold text-deckInk hover:bg-deckInk hover:text-white transition-colors">
+                            Ganti karya
+                        </button>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="font-heading font-bold text-base text-deckInk mb-1">Konten Daily Perusahaan untuk TikTok</h4>
+                        <p class="text-xs font-semibold text-deckAccent mb-2">TikTok • Riset Tren, Produksi & Editing Video</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">
+                            Pembuatan konsep dan penyuntingan konten video harian guna meningkatkan interaksi serta menampilkan budaya kerja perusahaan di TikTok.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 3. Konten Informatif Pindahan Kantor -->
+                <article class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-magang-3" src="https://placehold.co/600x375/F1F5F9/0F172A?text=Konten+Informatif%3A+Pindahan+Kantor" alt="Konten Informatif Pindahan Kantor" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-magang-3')" class="no-print absolute bottom-2.5 right-2.5 px-3 py-1 rounded-lg bg-white/95 border border-deckBorder text-[11px] font-semibold text-deckInk hover:bg-deckInk hover:text-white transition-colors">
+                            Ganti karya
+                        </button>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="font-heading font-bold text-base text-deckInk mb-1">Konten Informatif: Pindahan Kantor</h4>
+                        <p class="text-xs font-semibold text-deckAccent mb-2">Informative Content • Pengumuman Publik</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">
+                            Penyusunan materi komunikasi visual yang informatif dan jelas mengenai perpindahan lokasi kantor baru perusahaan.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- BAGIAN B: CANVA, LOGO, FEEDS, PROPOSAL, POSTER & FREELANCE (Buku Sadya dihapus) -->
+        <div class="deck-card rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5 mb-6 border-b border-deckBorder">
+                <div>
+                    <span class="text-xs font-bold text-deckAccent uppercase tracking-wider">Bagian B • Desain Grafis, Organisasi & Proyek Kolaborasi</span>
+                    <h3 class="font-heading font-extrabold text-xl text-deckInk mt-0.5">Koleksi Desain Logo, Feeds, Proposal Kreatif, Poster & Freelance</h3>
+                </div>
+
+                <!-- Tab Filter Kategori -->
+                <div class="no-print flex flex-wrap gap-2">
+                    <button onclick="filterCards('all', this)" class="tab-btn active px-3 py-1.5 rounded-xl border border-deckBorder text-xs font-semibold transition-colors">Semua</button>
+                    <button onclick="filterCards('logo', this)" class="tab-btn px-3 py-1.5 rounded-xl border border-deckBorder text-deckMuted hover:text-deckInk text-xs font-semibold transition-colors">Logo</button>
+                    <button onclick="filterCards('feeds', this)" class="tab-btn px-3 py-1.5 rounded-xl border border-deckBorder text-deckMuted hover:text-deckInk text-xs font-semibold transition-colors">Feeds & Kolaborasi</button>
+                    <button onclick="filterCards('proposal', this)" class="tab-btn px-3 py-1.5 rounded-xl border border-deckBorder text-deckMuted hover:text-deckInk text-xs font-semibold transition-colors">Proposal Kreatif</button>
+                    <button onclick="filterCards('poster', this)" class="tab-btn px-3 py-1.5 rounded-xl border border-deckBorder text-deckMuted hover:text-deckInk text-xs font-semibold transition-colors">Poster & Donasi</button>
+                    <button onclick="filterCards('freelance', this)" class="tab-btn px-3 py-1.5 rounded-xl border border-deckBorder text-deckMuted hover:text-deckInk text-xs font-semibold transition-colors">Freelance (3 di antaranya)</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- 1. LOGO: Logo Kepanitiaan OGF -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="logo">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-1" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Logo+Kepanitiaan+OGF" alt="Logo Kepanitiaan OGF" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-1')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Logo Kepanitiaan OGF</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Desain Logo • Identitas Visual Acara</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Perancangan logo utama yang merepresentasikan tema dan semangat kepanitiaan One Gold Future (OGF).</p>
+                    </div>
+                </article>
+
+                <!-- 2. LOGO: Logo Proposal Kerja Sama Sponsor Internal (Gotong Royong) -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="logo">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-2" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Logo+Proposal+Gotong+Royong" alt="Logo Proposal Gotong Royong" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-2')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Logo Proposal Sponsor Internal (Gotong Royong)</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Desain Logo • Kemitraan Internal</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Desain logo khusus untuk proposal kerja sama sponsor internal guna membangun citra kolaboratif.</p>
+                    </div>
+                </article>
+
+                <!-- 3. FEEDS: Feeds OGF 8.0 -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="feeds">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-3" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Feeds+OGF+8.0" alt="Feeds OGF 8.0" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-3')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Instagram Feeds OGF 8.0</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Social Media Feeds • Event Publication</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Pengelolaan tata letak grid visual dan desain konten publikasi rangkaian acara OGF 8.0.</p>
+                    </div>
+                </article>
+
+                <!-- 4. FEEDS: Feeds Pengurus PSM Unpad -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="feeds">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-4" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Feeds+Pengurus+PSM+Unpad" alt="Feeds Pengurus PSM Unpad" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-4')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Feeds Pengurus PSM Unpad</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Choral Branding • Social Media</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Perancangan template dan konten informasi visual untuk kepengurusan Paduan Suara Mahasiswa Unpad.</p>
+                    </div>
+                </article>
+
+                <!-- 5. KOLABORASI: Gojek Kampus dengan SICF -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="feeds">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-5" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Kolaborasi+Gojek+Kampus+x+SICF" alt="Kolaborasi Gojek Kampus dengan SICF" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-5')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Konten Kolaborasi Promosi Gojek Kampus × SICF</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Brand Collaboration • Promosi Kampanye</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Pembuatan materi promosi kolaborasi antara Gojek Kampus dan SICF dengan penyelarasan identitas visual kedua pihak.</p>
+                    </div>
+                </article>
+
+                <!-- 6. PROPOSAL: Proposal Kerja Sama Konser Intern -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="proposal">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-6" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Proposal+Kerja+Sama+Konser+Intern" alt="Proposal Kerja Sama Konser Intern" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-6')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Desain Proposal Kerja Sama Konser Intern</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Proposal Kreatif • Sponsorship Deck</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Tata letak dokumen penawaran kerja sama Konser Intern agar sistematis dan menarik bagi sponsor.</p>
+                    </div>
+                </article>
+
+                <!-- 7. PROPOSAL: Proposal Kerja Sama SICF -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="proposal">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-7" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Proposal+Kerja+Sama+SICF" alt="Proposal Kerja Sama SICF" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-7')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Proposal Kerja Sama SICF</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Proposal Kreatif • Kemitraan Korporat</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Perancangan desain proposal sponsorship untuk mendukung pendanaan delegasi SICF.</p>
+                    </div>
+                </article>
+
+                <!-- 8. PROPOSAL: Proposal Kerja Sama Indonesia Kirana 2025 -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="proposal">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-8" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Proposal+Indonesia+Kirana+2025" alt="Proposal Kerja Sama Indonesia Kirana 2025" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-8')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Proposal Kerja Sama Indonesia Kirana 2025</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Proposal Kreatif • Delegasi Internasional</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Desain dokumen kemitraan strategis Indonesia Kirana 2025 menuju Rimini, Italia.</p>
+                    </div>
+                </article>
+
+                <!-- 9. POSTER: Poster Open Donasi Konser Intern -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="poster">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-9" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Poster+Open+Donasi+Konser+Intern" alt="Poster Open Donasi Konser Intern" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-9')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Poster Open Donasi Konser Intern</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Poster & Donasi • Publikasi Resmi</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Desain poster kampanye penggalangan dana Konser Intern yang informatif dan persuasif.</p>
+                    </div>
+                </article>
+
+                <!-- 10. POSTER: Poster Paket Donasi SICF -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="poster">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-10" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Poster+Paket+Donasi+SICF" alt="Poster Paket Donasi SICF" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-10')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Poster Paket Donasi SICF</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Poster & Donasi • Infografis Paket</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Visualisasi tingkatan paket donasi SICF agar rincian kontribusi mudah dipahami calon donatur.</p>
+                    </div>
+                </article>
+
+                <!-- 11. POSTER: Konten Donasi Indonesia Kirana -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="poster">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-11" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Konten+Donasi+Indonesia+Kirana" alt="Konten Donasi Indonesia Kirana" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-11')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Konten Donasi Indonesia Kirana</h4>
+                        <p class="text-[11px] font-semibold text-deckAccent mt-0.5 mb-1.5">Poster & Donasi • Kampanye Digital</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Desain materi publikasi donasi untuk mendukung penyelenggaraan Indonesia Kirana 2025.</p>
+                    </div>
+                </article>
+
+                <!-- 12. FREELANCE #1 -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="freelance">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-12" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Freelance+Edit+Poster+%231" alt="Freelance Edit Poster 1" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-12')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Freelance Edit Poster #1</h4>
+                        <p class="text-[11px] font-semibold text-deckInk mt-0.5 mb-1.5">Freelance • 3 di antaranya</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Penyuntingan komposisi tata letak, tipografi, dan penyelarasan visual poster klien sesuai brief.</p>
+                    </div>
+                </article>
+
+                <!-- 13. FREELANCE #2 -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="freelance">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-13" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Freelance+Edit+Poster+%232" alt="Freelance Edit Poster 2" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-13')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Freelance Edit Poster #2</h4>
+                        <p class="text-[11px] font-semibold text-deckInk mt-0.5 mb-1.5">Freelance • 3 di antaranya</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Perbaikan hierarki informasi dan peningkatan estetika visual pada materi promosi klien lepas.</p>
+                    </div>
+                </article>
+
+                <!-- 14. FREELANCE #3 -->
+                <article class="design-card bg-deckBg border border-deckBorder rounded-2xl overflow-hidden flex flex-col" data-cat="freelance">
+                    <div class="relative aspect-[16/10] bg-white border-b border-deckBorder">
+                        <img id="work-b-14" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Freelance+Edit+Poster+%233" alt="Freelance Edit Poster 3" class="w-full h-full object-cover">
+                        <button onclick="openUpload('work-b-14')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4 flex-1">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Freelance Edit Poster #3</h4>
+                        <p class="text-[11px] font-semibold text-deckInk mt-0.5 mb-1.5">Freelance • 3 di antaranya</p>
+                        <p class="text-xs text-deckMuted leading-relaxed">Redesign visual dan penyesuaian format poster publikasi digital siap tayang.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. RISET LAPANGAN & PRESTASI -->
+    <section id="sec-05" class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        <div class="mb-5">
+            <span class="text-xs font-bold tracking-widest uppercase text-deckAccent">05. RISET LAPANGAN & PRESTASI</span>
+            <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-deckInk mt-1">Dokumentasi Lapangan — Riset Sosial, CSR & Publikasi SINTA</h2>
+        </div>
+
+        <!-- 3 Kartu Riset Sosial -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+            <div class="deck-card rounded-3xl overflow-hidden flex flex-col">
+                <div class="relative aspect-[16/10] bg-deckBg border-b border-deckBorder">
+                    <img id="img-riset-1" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Publikasi+Jurnal+SINTA+2+(Satwika)" alt="Publikasi Jurnal SINTA 2" class="w-full h-full object-cover">
+                    <button onclick="openUpload('img-riset-1')" class="no-print absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                </div>
+                <div class="p-5 flex-1">
+                    <h3 class="font-heading font-bold text-base text-deckInk mb-1.5">Publikasi Jurnal SINTA 2 (Satwika)</h3>
+                    <p class="text-xs text-deckMuted leading-relaxed">Penulis Pertama: Studi kasus & riset kuantitatif filantropi seni di mal Kota Bandung.</p>
+                </div>
+            </div>
+
+            <div class="deck-card rounded-3xl overflow-hidden flex flex-col">
+                <div class="relative aspect-[16/10] bg-deckBg border-b border-deckBorder">
+                    <img id="img-riset-2" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Pemetaan+Sosial+CSR+Desa+Cipacing" alt="Pemetaan Sosial CSR Desa Cipacing" class="w-full h-full object-cover">
+                    <button onclick="openUpload('img-riset-2')" class="no-print absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                </div>
+                <div class="p-5 flex-1">
+                    <h3 class="font-heading font-bold text-base text-deckInk mb-1.5">Pemetaan Sosial CSR Desa Cipacing</h3>
+                    <p class="text-xs text-deckMuted leading-relaxed">Praktisi CSR: Identifikasi potensi & kebutuhan warga RW 15 Jatinangor untuk program komunitas.</p>
+                </div>
+            </div>
+
+            <div class="deck-card rounded-3xl overflow-hidden flex flex-col">
+                <div class="relative aspect-[16/10] bg-deckBg border-b border-deckBorder">
+                    <img id="img-riset-3" src="https://placehold.co/500x310/F1F5F9/0F172A?text=Riset+Pariwisata+Pangandaran+(SINTA+4)" alt="Riset Pariwisata Pangandaran" class="w-full h-full object-cover">
+                    <button onclick="openUpload('img-riset-3')" class="no-print absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                </div>
+                <div class="p-5 flex-1">
+                    <h3 class="font-heading font-bold text-base text-deckInk mb-1.5">Riset Pariwisata Pangandaran (SINTA 4)</h3>
+                    <p class="text-xs text-deckMuted leading-relaxed">Jurnal Responsive: Observasi partisipatif keterlibatan masyarakat lokal dalam pariwisata.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trophy & Certificates -->
+        <div class="deck-card rounded-3xl p-6 sm:p-8">
+            <div class="mb-6">
+                <span class="px-2.5 py-1 rounded-md bg-deckSoft text-deckAccent text-[11px] font-bold uppercase tracking-wider">Trophy & Certificates</span>
+                <h3 class="font-heading font-extrabold text-xl text-deckInk mt-2">Dokumentasi Prestasi Internasional & Nasional</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden">
+                    <div class="relative aspect-[4/3] bg-white border-b border-deckBorder">
+                        <img id="img-trophy-1" src="https://placehold.co/400x300/F1F5F9/0F172A?text=Grand+Prix+Bali+2026" alt="Grand Prix Winner Bali 2026" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-trophy-1')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Grand Prix Winner — Bali 2026</h4>
+                        <p class="text-xs text-deckMuted mt-0.5">15th Bali Int. Choir Festival</p>
+                    </div>
+                </div>
+
+                <div class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden">
+                    <div class="relative aspect-[4/3] bg-white border-b border-deckBorder">
+                        <img id="img-trophy-2" src="https://placehold.co/400x300/F1F5F9/0F172A?text=1st+Place+Rimini+Italia+2025" alt="1st Place Rimini Italia 2025" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-trophy-2')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">1st Place — Rimini, Italia 2025</h4>
+                        <p class="text-xs text-deckMuted mt-0.5">Mixed Choir Winner (95.15 pts)</p>
+                    </div>
+                </div>
+
+                <div class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden">
+                    <div class="relative aspect-[4/3] bg-white border-b border-deckBorder">
+                        <img id="img-trophy-3" src="https://placehold.co/400x300/F1F5F9/0F172A?text=2+Gold+Medals+Singapura+2024" alt="2 Gold Medals Singapura 2024" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-trophy-3')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">2 Gold Medals — Singapura 2024</h4>
+                        <p class="text-xs text-deckMuted mt-0.5">Category Winner Mixed Voices</p>
+                    </div>
+                </div>
+
+                <div class="bg-deckBg border border-deckBorder rounded-2xl overflow-hidden">
+                    <div class="relative aspect-[4/3] bg-white border-b border-deckBorder">
+                        <img id="img-trophy-4" src="https://placehold.co/400x300/F1F5F9/0F172A?text=Juara+3+Nasional+SOCIETI" alt="Juara 3 Nasional SOCIETI" class="w-full h-full object-cover">
+                        <button onclick="openUpload('img-trophy-4')" class="no-print absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-white/95 border border-deckBorder text-[10px] font-semibold text-deckInk hover:bg-deckInk hover:text-white">Ganti</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-heading font-bold text-sm text-deckInk">Juara 3 Nasional SOCIETI</h4>
+                        <p class="text-xs text-deckMuted mt-0.5">Olimpiade IPS Se-Nasional</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ringkasan List Prestasi -->
+            <div class="pt-6 border-t border-deckBorder">
+                <h4 class="font-heading font-bold text-xs uppercase tracking-wider text-deckMuted mb-3">Ringkasan List Prestasi</h4>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-xs sm:text-sm text-deckInk">
+                    <li>• <strong>Grand Prix Winner Choir Championship</strong> — 15th Bali Int. Choir Festival (2026)</li>
+                    <li>• <strong>1st Place Mixed Choir Winner (95.15 pts)</strong> — 18th Rimini Int. Choir, Italia (2025)</li>
+                    <li>• <strong>3rd Place Mixed Choir Championship (90.25 pts)</strong> — Bali Int. Choir Festival (2026)</li>
+                    <li>• <strong>2nd Place Secular & 3rd Place Musica Sacra</strong> — Rimini, Italia (2025)</li>
+                    <li>• <strong>Category Winner & 2 Gold Medals</strong> — 8th Singapore Int. Choral Festival (2024)</li>
+                    <li>• <strong>Juara 3 Olimpiade IPS Se-Nasional</strong> — Social Studies Competition 1.0 (2021)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / KONTAK -->
+    <footer id="kontak" class="max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-16">
+        <div class="bg-deckInk text-white rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div class="max-w-xl">
+                <span class="inline-block px-3 py-1 rounded-lg bg-white/10 text-blue-300 text-xs font-bold mb-3">
+                    Terbuka untuk Karier, Riset & Kemitraan
+                </span>
+                <h2 class="font-heading font-extrabold text-2xl sm:text-4xl leading-tight mb-3">
+                    Mari Ciptakan Dampak Bersama.
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Hubungi saya untuk peluang kerja penuh waktu, proyek riset sosial/CSR, strategi konten & desain digital, maupun kerja sama sponsorship.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                <a href="mailto:renjhapraditia923@gmail.com" class="inline-flex items-center justify-between gap-4 px-5 py-3.5 rounded-2xl bg-white text-deckInk hover:bg-slate-100 text-xs sm:text-sm font-bold transition-colors">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="mail" class="w-4 h-4 text-deckAccent"></i>
+                        <span>renjhapraditia923@gmail.com</span>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-wider text-deckMuted">Email</span>
+                </a>
+                <a href="https://wa.me/6288219885975" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between gap-4 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/15 text-xs sm:text-sm font-bold transition-colors">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="phone" class="w-4 h-4 text-blue-300"></i>
+                        <span>+62 882-1988-5975</span>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-wider text-slate-300">WhatsApp / Telepon</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-deckMuted px-2">
+            <div>© 2026 Renjha Ramda Praditia — Garut & Bandung, Jawa Barat.</div>
+            <div class="italic">“A journey of Knowledge, Care & Impact.”</div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        let activeImgTarget = null;
+        const fileInput = document.getElementById('photo-uploader');
+
+        function notify(text) {
+            const toast = document.getElementById('toast');
+            const label = document.getElementById('toast-label');
+            label.textContent = text;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2800);
+        }
+
+        function openUpload(imgId) {
+            activeImgTarget = imgId;
+            fileInput.value = '';
+            fileInput.click();
+        }
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file || !activeImgTarget) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const img = document.getElementById(activeImgTarget);
+                if (img) {
+                    img.src = evt.target.result;
+                    notify('Berhasil mengganti foto / karya!');
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function filterCards(category, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active');
+                b.classList.add('text-deckMuted');
+            });
+            btn.classList.add('active');
+            btn.classList.remove('text-deckMuted');
+
+            document.querySelectorAll('.design-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function copyContact(val) {
+            const temp = document.createElement('input');
+            temp.value = val;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            notify('Berhasil disalin: ' + val);
+        }
+    </script>
+</body>
+</html>
