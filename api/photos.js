@@ -5,6 +5,7 @@ const PHOTOS_PREFIX = 'photos/';
 const ALLOWED_SLOTS = new Set([
   'img-tool-1', 'img-tool-2', 'img-tool-3', 'img-tool-4',
   'img-org-1', 'img-org-2', 'img-org-3',
+  'work-magang-1', 'work-magang-2', 'work-magang-3',
 ]);
 const MAX_BYTES = 4 * 1024 * 1024;
 const ALLOWED_TYPES = {
